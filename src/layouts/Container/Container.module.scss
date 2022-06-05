@@ -1,0 +1,9 @@
+@use '../../scss/variables' as *;
+
+.container {
+  padding: 0 $base-side-padding;
+  max-width: 144rem;
+  margin: 0 auto;
+}
+
+// Mobile
