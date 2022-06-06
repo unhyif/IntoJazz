@@ -4,8 +4,12 @@ import styles from './Button.module.scss';
 
 const cn = classNames.bind(styles);
 
-const Button = ({ content, bgColor = 'white' }) => {
-  return <button className={cn(bgColor)}>{content}</button>;
+const Button = ({ content, disabled = false, bgColor = 'white' }) => {
+  return (
+    <button className={cn(bgColor)} disabled={disabled}>
+      {content}
+    </button>
+  );
 };
 
 export default Button;
