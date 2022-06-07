@@ -4,9 +4,9 @@ import ServiceContextProvider from 'contexts/ServiceContext';
 import UserContextProvider from 'contexts/UserContext';
 import Layout from 'layouts/Layout';
 import Home from 'routes/Home/Home';
-import Signup from 'routes/Signup/Signup';
 import ErrorBoundary from 'components/ErrorBoundary';
 
+const Signup = lazy(() => import('routes/Signup/Signup'));
 const Error = lazy(() => import('routes/Error/Error'));
 
 const App = () => {

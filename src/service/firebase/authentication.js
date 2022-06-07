@@ -3,6 +3,7 @@ import {
   getAuth,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
@@ -15,7 +16,9 @@ export default class AuthService {
   setAuthStateObserver(setUser) {
     onAuthStateChanged(this.auth, user => {
       if (user) {
-        setUser(user.uid);
+        return user.emailVerified
+          ? setUser(user.uid)
+          : 'Please verify your email';
       } else {
         setUser(null);
       }
@@ -27,6 +30,7 @@ export default class AuthService {
       .then(userCredential => {
         const user = userCredential.user;
         console.log(user);
+        return sendEmailVerification(user);
       })
       .catch(error => {
         const errorCode = error.code;

@@ -3,7 +3,7 @@ import { useAuthServiceContext } from 'contexts/ServiceContext';
 import { validate } from 'common/validate';
 import Button from 'components/Button/Button';
 
-const SignupForm = () => {
+const SignupForm = ({ onSuccess }) => {
   /* states */
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
@@ -36,13 +36,19 @@ const SignupForm = () => {
   const authService = useRef(useAuthServiceContext());
   const onSubmit = e => {
     e.preventDefault();
-    authService.current.signup(email, password);
+    authService.current.signup(email, password).then(() => onSuccess());
   };
 
   return (
     <form onSubmit={onSubmit}>
       <label htmlFor="email">Email</label>
-      <input id="email" name="email" value={email} onChange={onEmailChange} />
+      <input
+        id="email"
+        name="email"
+        value={email}
+        placeholder="example@intojazz.com"
+        onChange={onEmailChange}
+      />
       {!!email.length && !isEmailValid && <p>Enter a valid email address.</p>}
 
       <label htmlFor="password">Password</label>
@@ -51,6 +57,7 @@ const SignupForm = () => {
         id="password"
         name="password"
         value={password}
+        placeholder="********"
         onChange={onPasswordChange}
       />
       {!!password.length && !isPasswordValid && (
@@ -66,6 +73,7 @@ const SignupForm = () => {
         id="password-confirm"
         name="password-confirm"
         value={passwordConfirm}
+        placeholder="********"
         onChange={onPasswordConfirmChange}
       />
       {!!passwordConfirm.length && !isPasswordConfirmValid && (
