@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useAuthServiceContext } from 'contexts/ServiceContext';
+import { useModalHandlersContext } from 'contexts/ModalHandlersContext';
 import { validate } from 'common/validate';
 import Button from 'components/Button/Button';
 
@@ -11,6 +12,7 @@ const LoginForm = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const authService = useRef(useAuthServiceContext());
+  const closeModal = useRef(useModalHandlersContext().closeModal);
 
   /* event handler */
   const onSubmit = e => {
@@ -24,7 +26,7 @@ const LoginForm = () => {
     setIsPasswordValid(isPasswordValid);
     if (!isEmailValid || !isPasswordValid) return;
 
-    authService.current.login(email, password);
+    authService.current.login(email, password).then(() => closeModal.current());
   };
 
   return (

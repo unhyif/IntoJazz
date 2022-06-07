@@ -10,12 +10,10 @@ const Button = ({
   disabled = false,
   bgColor = 'white',
   onClick = noFunction,
-}) => {
-  return (
+}) =>  (
     <button className={cn(bgColor)} disabled={disabled} onClick={onClick}>
       {content}
     </button>
   );
-};
 
 export default Button;

@@ -1,28 +1,40 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames/bind';
-import Button from 'components/Button/Button';
-import styles from './Header.module.scss';
 import { useUserContext } from 'contexts/UserContext';
 import { useAuthServiceContext } from 'contexts/ServiceContext';
+import { useModalHandlersContext } from 'contexts/ModalHandlersContext';
+import classNames from 'classnames/bind';
+import LoginForm from 'components/LoginForm/LoginForm';
+import Button from 'components/Button/Button';
+import styles from './Header.module.scss';
 
 const cn = classNames.bind(styles);
 
 const Header = () => {
-  const authService = useAuthServiceContext();
   const user = useUserContext();
+  const authService = useRef(useAuthServiceContext());
+  const openModal = useRef(useModalHandlersContext().openModal);
 
-  const onLogout = () => authService.logout();
+  const onLogin = useCallback(
+    () =>
+      openModal.current({
+        open: true,
+        title: 'Log in',
+        description: 'Log in with email or other providers',
+        content: <LoginForm />,
+      }),
+    []
+  );
+  const onLogout = useCallback(() => authService.current.logout(), []);
 
   return (
     <header>
       <Link to="/">IntoJazz</Link>
       {user ? (
-        <Button content="Log out" onClick={onLogout} />
+        <Button content="Log out" bgColor="light-purple" onClick={onLogout} />
       ) : (
-        <Link to="/login">Log in</Link>
+        <Button content="Log in" bgColor="light-purple" onClick={onLogin} />
       )}
-      {/* <Button content="Log in" bgColor="light-purple" /> */}
     </header>
   );
 };
