@@ -16,9 +16,7 @@ export default class AuthService {
   setAuthStateObserver(setUser) {
     onAuthStateChanged(this.auth, user => {
       if (user) {
-        return user.emailVerified
-          ? setUser(user.uid)
-          : 'Please verify your email';
+        user.emailVerified ? setUser(user.uid) : this.logout();
       } else {
         setUser(null);
       }
@@ -27,29 +25,22 @@ export default class AuthService {
 
   signup(email, password) {
     return createUserWithEmailAndPassword(this.auth, email, password)
-      .then(userCredential => {
-        const user = userCredential.user;
-        console.log(user);
-        return sendEmailVerification(user);
-      })
+      .then(userCredential => sendEmailVerification(userCredential.user))
       .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        console.log(error.code, error.message);
+        throw error;
       });
   }
 
   login(email, password) {
-    signInWithEmailAndPassword(this.auth, email, password)
-      .then(userCredential => {
-        const user = userCredential.user;
-        console.log(user);
-      })
-      .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
+    return (
+      signInWithEmailAndPassword(this.auth, email, password)
+        // .then(userCredential => {})
+        .catch(error => {
+          console.log(error.code, error.message);
+          throw error;
+        })
+    );
   }
 
   logout() {

@@ -7,6 +7,7 @@ import Home from 'routes/Home/Home';
 import ErrorBoundary from 'components/ErrorBoundary';
 
 const Signup = lazy(() => import('routes/Signup/Signup'));
+const LoginForm = lazy(() => import('components/LoginForm/LoginForm'));
 const Error = lazy(() => import('routes/Error/Error'));
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
               <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
                 <Route path="signup" element={<Signup />} />
+                <Route path="login" element={<LoginForm />} />
                 <Route path="*" element={<Error />} />
               </Route>
             </Routes>
