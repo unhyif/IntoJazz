@@ -3,6 +3,7 @@ import { useAuthServiceContext } from 'contexts/ServiceContext';
 import { useModalHandlersContext } from 'contexts/ModalHandlersContext';
 import { validate } from 'common/validate';
 import Button from 'components/Button/Button';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   /* states */
@@ -51,6 +52,7 @@ const LoginForm = () => {
           name="password"
           defaultValue=""
           placeholder="********"
+          autoComplete="current-password"
         />
         {!isPasswordValid && (
           <p>
@@ -60,6 +62,8 @@ const LoginForm = () => {
         )}
 
         <Button content="Log in"></Button>
+
+        <Link to="/signup">New to IntoJazz?</Link>
       </form>
     </div>
   );

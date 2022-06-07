@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import CustomModal from 'components/customModal/CustomModal';
 
 const initialState = {
@@ -17,6 +18,9 @@ const ModalHandlersProvider = ({ children }) => {
     openModal: setModal,
     closeModal: () => setModal(initialState),
   };
+
+  const location = useLocation();
+  useEffect(handlers.closeModal, [location]);
 
   return (
     <ModalHandlersContext.Provider value={handlers}>
