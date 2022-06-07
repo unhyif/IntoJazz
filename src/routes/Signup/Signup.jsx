@@ -11,10 +11,7 @@ const Signup = () => {
       <p>We've just sent you an email for verification. Please check it!</p>
     </>
   ) : (
-    <>
-      <h1>Sign Up</h1>
-      <SignupForm onSuccess={onSuccess} />
-    </>
+    <SignupForm onSuccess={onSuccess} />
   );
 };
 

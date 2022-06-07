@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import CustomModal from 'components/customModal/CustomModal';
 
 const initialState = {
@@ -11,27 +11,25 @@ const initialState = {
 const ModalHandlersContext = React.createContext(initialState);
 export const useModalHandlersContext = () => useContext(ModalHandlersContext);
 
-const ModalHandlersContextProvider = ({ children }) => {
+const ModalHandlersProvider = ({ children }) => {
   const [modal, setModal] = useState(initialState);
-  const handlers = useRef({
+  const handlers = {
     openModal: setModal,
     closeModal: () => setModal(initialState),
-  });
+  };
 
   return (
-    <>
-      <ModalHandlersContext.Provider value={handlers.current}>
-        {children}
-        <CustomModal
-          open={modal.open}
-          onClose={handlers.current.closeModal}
-          title={modal.title}
-          description={modal.description}
-          content={modal.content}
-        ></CustomModal>
-      </ModalHandlersContext.Provider>
-    </>
+    <ModalHandlersContext.Provider value={handlers}>
+      {children}
+      <CustomModal
+        open={modal.open}
+        onClose={handlers.closeModal}
+        title={modal.title}
+        description={modal.description}
+        content={modal.content}
+      ></CustomModal>
+    </ModalHandlersContext.Provider>
   );
 };
 
-export default ModalHandlersContextProvider;
+export default ModalHandlersProvider;

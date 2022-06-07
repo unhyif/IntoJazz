@@ -6,10 +6,10 @@ const authService = new AuthService();
 const AuthServiceContext = React.createContext(authService);
 export const useAuthServiceContext = () => useContext(AuthServiceContext);
 
-const ServiceContextProvider = ({ children }) => (
+const ServiceProvider = ({ children }) => (
   <AuthServiceContext.Provider value={authService}>
     {children}
   </AuthServiceContext.Provider>
 );
 
-export default ServiceContextProvider;
+export default ServiceProvider;
