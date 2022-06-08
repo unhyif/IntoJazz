@@ -14,6 +14,8 @@ const SignupForm = ({ onSuccess }) => {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [isPasswordConfirmValid, setIsPasswordConfirmValid] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   /* event handlers */
   const onEmailChange = e => {
     const email = e.target.value;
@@ -36,7 +38,10 @@ const SignupForm = ({ onSuccess }) => {
   const authService = useAuthServiceContext();
   const onSubmit = e => {
     e.preventDefault();
-    authService.signup(email, password).then(() => onSuccess());
+    authService
+      .signup(email, password)
+      .then(() => onSuccess())
+      .catch(e => setErrorMessage(e.message));
   };
 
   return (
@@ -82,6 +87,8 @@ const SignupForm = ({ onSuccess }) => {
         {!!password.length && !isPasswordConfirmValid && (
           <p>It must match the password.</p>
         )}
+
+        {errorMessage && <p>{errorMessage}</p>}
 
         <Button
           content="Sign Up"

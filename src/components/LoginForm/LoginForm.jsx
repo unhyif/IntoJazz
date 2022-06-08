@@ -9,6 +9,7 @@ const LoginForm = () => {
   /* states */
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -18,6 +19,8 @@ const LoginForm = () => {
   /* event handlers */
   const onSubmit = e => {
     e.preventDefault();
+    errorMessage && setErrorMessage('');
+
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
@@ -27,7 +30,10 @@ const LoginForm = () => {
     setIsPasswordValid(isPasswordValid);
     if (!isEmailValid || !isPasswordValid) return;
 
-    authService.login(email, password).then(() => closeModal());
+    authService
+      .login(email, password)
+      .then(() => closeModal())
+      .catch(e => setErrorMessage(e.message));
   };
 
   return (
@@ -61,6 +67,8 @@ const LoginForm = () => {
             characters and special characters.
           </p>
         )}
+
+        {errorMessage && <p>{errorMessage}</p>}
 
         <Button content="Log in"></Button>
 

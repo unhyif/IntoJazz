@@ -8,6 +8,19 @@ import {
   signOut,
 } from 'firebase/auth';
 
+function getErrorMessage(errorCode) {
+  switch (errorCode) {
+    case 'auth/email-already-in-use':
+      return 'This email is already in use.';
+    case 'auth/user-not-found':
+      return 'There is no existing account corresponding to this email.';
+    case 'auth/wrong-password':
+      return 'The password is incorrect.';
+    default:
+      return `[${errorCode}]: Please report it to us.`;
+  }
+}
+
 const AUTHENTICATED_USER = 'authenticated_user';
 
 export default class AuthService {
@@ -28,9 +41,8 @@ export default class AuthService {
   signup(email, password) {
     return createUserWithEmailAndPassword(this.auth, email, password)
       .then(userCredential => sendEmailVerification(userCredential.user))
-      .catch(error => {
-        console.log(error.code, error.message);
-        throw error;
+      .catch(e => {
+        throw new Error(getErrorMessage(e.code));
       });
   }
 
@@ -42,9 +54,8 @@ export default class AuthService {
           JSON.stringify(userCredential.user.uid)
         )
       )
-      .catch(error => {
-        console.log(error.code, error.message);
-        throw error;
+      .catch(e => {
+        throw new Error(getErrorMessage(e.code));
       });
   }
 
@@ -53,9 +64,6 @@ export default class AuthService {
       .then(() =>
         localStorage.setItem(AUTHENTICATED_USER, JSON.stringify(null))
       )
-      .catch(error => {
-        console.log(error.code, error.message);
-        throw error;
-      });
+      .catch(e => console.error(e.code));
   }
 }
