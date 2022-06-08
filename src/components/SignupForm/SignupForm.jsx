@@ -45,59 +45,54 @@ const SignupForm = ({ onSuccess }) => {
   };
 
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          name="email"
-          value={email}
-          placeholder="example@intojazz.com"
-          onChange={onEmailChange}
-          autoComplete="email"
-        />
-        {!!email.length && !isEmailValid && <p>Enter a valid email address.</p>}
+    <form onSubmit={onSubmit}>
+      <label htmlFor="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        value={email}
+        placeholder="example@intojazz.com"
+        onChange={onEmailChange}
+        autoComplete="email"
+      />
+      {!!email.length && !isEmailValid && <p>Enter a valid email address.</p>}
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          placeholder="********"
-          onChange={onPasswordChange}
-        />
-        {!!password.length && !isPasswordValid && (
-          <p>
-            Use more than 8 letters containing digits, upper/lowercase
-            characters and special characters.
-          </p>
-        )}
+      <label htmlFor="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        value={password}
+        placeholder="********"
+        onChange={onPasswordChange}
+      />
+      {!!password.length && !isPasswordValid && (
+        <p>
+          Use more than 8 letters containing digits, upper/lowercase characters
+          and special characters.
+        </p>
+      )}
 
-        <label htmlFor="password-confirm">Confirm Password</label>
-        <input
-          type="password"
-          id="password-confirm"
-          name="password-confirm"
-          value={passwordConfirm}
-          placeholder="********"
-          onChange={onPasswordConfirmChange}
-        />
-        {!!password.length && !isPasswordConfirmValid && (
-          <p>It must match the password.</p>
-        )}
+      <label htmlFor="password-confirm">Confirm Password</label>
+      <input
+        type="password"
+        id="password-confirm"
+        name="password-confirm"
+        value={passwordConfirm}
+        placeholder="********"
+        onChange={onPasswordConfirmChange}
+      />
+      {!!password.length && !isPasswordConfirmValid && (
+        <p>It must match the password.</p>
+      )}
 
-        {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && <p>{errorMessage}</p>}
 
-        <Button
-          content="Sign Up"
-          disabled={
-            !(isEmailValid && isPasswordValid && isPasswordConfirmValid)
-          }
-        ></Button>
-      </form>
-    </div>
+      <Button
+        content="Sign Up"
+        disabled={!(isEmailValid && isPasswordValid && isPasswordConfirmValid)}
+      ></Button>
+    </form>
   );
 };
 

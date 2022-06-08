@@ -19,7 +19,6 @@ const Header = () => {
   /* event handlers */
   const onLogin = () =>
     openModal({
-      open: true,
       title: 'Log in',
       description: 'Log in with email or other providers',
       content: <LoginForm />,

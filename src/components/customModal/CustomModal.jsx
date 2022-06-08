@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+// import { Dialog, DialogContent } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -16,8 +17,24 @@ const style = {
 
 const CustomModal = ({ title, description, content, ...others }) => (
   <Modal {...others} aria-labelledby={title} aria-describedby={description}>
-    <Box sx={style}>{content}</Box>
+    <Box sx={style}>
+      <h1>{title}</h1>
+      {content}
+    </Box>
   </Modal>
 );
 
 export default CustomModal;
+
+// const Modal = ({ title, description, content, ...others }) => (
+//   <Dialog
+//     {...others}
+//     aria-labelledby={title}
+//     aria-describedby={description}
+//     sx={{ '& .MuiDialog-paper': { padding: '2em' } }}
+//   >
+//     {content}
+//   </Dialog>
+// );
+
+// export default Modal;

@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { useModalHandlersContext } from './ModalHandlersContext';
 import { useAuthServiceContext } from './ServiceContext';
+import VerificationNotice from 'components/VerificationNotice/VerificationNotice';
 
 const UserContext = createContext(null);
 export const useUserContext = () => useContext(UserContext);
@@ -9,7 +11,15 @@ const UserProvider = ({ children }) => {
     JSON.parse(localStorage.getItem('authenticated_user'))
   );
   const authService = useAuthServiceContext();
-  useEffect(() => authService.setAuthStateObserver(setUser), []);
+  const openModal = useModalHandlersContext().openModal;
+
+  const onUnverified = () =>
+    openModal({
+      title: 'Unverified Email',
+      description: 'Please verify your email to enjoy all of our services.',
+      content: <VerificationNotice />,
+    });
+  useEffect(() => authService.setAuthStateObserver(setUser, onUnverified), []);
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };

@@ -28,13 +28,16 @@ export default class AuthService {
     this.auth = getAuth(firebaseApp);
   }
 
-  setAuthStateObserver(setUser) {
+  setAuthStateObserver(setUser, onUnverified) {
     onAuthStateChanged(this.auth, user => {
-      if (user) {
-        user.emailVerified ? setUser(user.uid) : this.logout();
-      } else {
+      if (!user) {
         setUser(null);
+        return;
       }
+
+      user.emailVerified
+        ? setUser(user.uid)
+        : this.logout().then(() => onUnverified());
     });
   }
 

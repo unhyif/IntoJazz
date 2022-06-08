@@ -28,7 +28,7 @@ const LoginForm = () => {
     setIsEmailValid(isEmailValid);
     const isPasswordValid = validate('password', password);
     setIsPasswordValid(isPasswordValid);
-    if (!isEmailValid || !isPasswordValid) return;
+    if (!(isEmailValid && isPasswordValid)) return;
 
     authService
       .login(email, password)
@@ -37,44 +37,41 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
-      <h1>Log in</h1>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="email">Email</label>
-        <input
-          ref={emailRef}
-          id="email"
-          name="email"
-          defaultValue=""
-          placeholder="example@intojazz.com"
-          autoComplete="email"
-        />
-        {!isEmailValid && <p>Enter a valid email address.</p>}
+    <form onSubmit={onSubmit}>
+      <label htmlFor="email">Email</label>
+      <input
+        ref={emailRef}
+        id="email"
+        name="email"
+        defaultValue=""
+        placeholder="example@intojazz.com"
+        autoComplete="email"
+      />
+      {!isEmailValid && <p>Enter a valid email address.</p>}
 
-        <label htmlFor="password">Password</label>
-        <input
-          ref={passwordRef}
-          type="password"
-          id="password"
-          name="password"
-          defaultValue=""
-          placeholder="********"
-          autoComplete="current-password"
-        />
-        {!isPasswordValid && (
-          <p>
-            Use more than 8 letters containing digits, upper/lowercase
-            characters and special characters.
-          </p>
-        )}
+      <label htmlFor="password">Password</label>
+      <input
+        ref={passwordRef}
+        type="password"
+        id="password"
+        name="password"
+        defaultValue=""
+        placeholder="********"
+        autoComplete="current-password"
+      />
+      {!isPasswordValid && (
+        <p>
+          Use more than 8 letters containing digits, upper/lowercase characters
+          and special characters.
+        </p>
+      )}
 
-        {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && <p>{errorMessage}</p>}
 
-        <Button content="Log in"></Button>
+      <Button content="Log in"></Button>
 
-        <Link to="/signup">New to IntoJazz?</Link>
-      </form>
-    </div>
+      <Link to="/signup">New to IntoJazz?</Link>
+    </form>
   );
 };
 

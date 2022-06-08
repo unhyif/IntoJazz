@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import CustomModal from 'components/customModal/CustomModal';
+import CustomModal from 'components/CustomModal/CustomModal';
 
 const initialState = {
   open: false,
@@ -15,7 +15,7 @@ export const useModalHandlersContext = () => useContext(ModalHandlersContext);
 const ModalHandlersProvider = ({ children }) => {
   const [modal, setModal] = useState(initialState);
   const handlers = {
-    openModal: setModal,
+    openModal: payload => setModal({ open: true, ...payload }),
     closeModal: () => setModal(initialState),
   };
 
