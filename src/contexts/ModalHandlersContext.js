@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import CustomModal from 'components/customModal/CustomModal';
 
@@ -9,7 +9,7 @@ const initialState = {
   content: null,
 };
 
-const ModalHandlersContext = React.createContext(initialState);
+const ModalHandlersContext = createContext(initialState);
 export const useModalHandlersContext = () => useContext(ModalHandlersContext);
 
 const ModalHandlersProvider = ({ children }) => {

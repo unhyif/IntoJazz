@@ -41,6 +41,7 @@ const LoginForm = () => {
           name="email"
           defaultValue=""
           placeholder="example@intojazz.com"
+          autoComplete="email"
         />
         {!isEmailValid && <p>Enter a valid email address.</p>}
 

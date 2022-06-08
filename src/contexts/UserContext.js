@@ -1,11 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useAuthServiceContext } from './ServiceContext';
 
-const UserContext = React.createContext(null);
+const UserContext = createContext(null);
 export const useUserContext = () => useContext(UserContext);
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem('authenticated_user'))
+  );
   const authService = useAuthServiceContext();
   useEffect(() => authService.setAuthStateObserver(setUser), []);
 

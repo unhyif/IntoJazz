@@ -8,6 +8,8 @@ import {
   signOut,
 } from 'firebase/auth';
 
+const AUTHENTICATED_USER = 'authenticated_user';
+
 export default class AuthService {
   constructor() {
     this.auth = getAuth(firebaseApp);
@@ -33,17 +35,27 @@ export default class AuthService {
   }
 
   login(email, password) {
-    return (
-      signInWithEmailAndPassword(this.auth, email, password)
-        // .then(userCredential => {})
-        .catch(error => {
-          console.log(error.code, error.message);
-          throw error;
-        })
-    );
+    return signInWithEmailAndPassword(this.auth, email, password)
+      .then(userCredential =>
+        localStorage.setItem(
+          AUTHENTICATED_USER,
+          JSON.stringify(userCredential.user.uid)
+        )
+      )
+      .catch(error => {
+        console.log(error.code, error.message);
+        throw error;
+      });
   }
 
   logout() {
-    signOut(this.auth);
+    return signOut(this.auth)
+      .then(() =>
+        localStorage.setItem(AUTHENTICATED_USER, JSON.stringify(null))
+      )
+      .catch(error => {
+        console.log(error.code, error.message);
+        throw error;
+      });
   }
 }

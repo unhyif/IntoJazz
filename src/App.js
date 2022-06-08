@@ -5,6 +5,7 @@ import ModalHandlersProvider from 'contexts/ModalHandlersContext';
 import UserProvider from 'contexts/UserContext';
 import Layout from 'layouts/Layout';
 import Home from 'routes/Home/Home';
+import GuestOnly from 'components/GuestOnly';
 import ErrorBoundary from 'components/ErrorBoundary';
 
 const Signup = lazy(() => import('routes/Signup/Signup'));
@@ -20,7 +21,14 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
-                <Route path="signup" element={<Signup />} />
+                <Route
+                  path="signup"
+                  element={
+                    <GuestOnly>
+                      <Signup />
+                    </GuestOnly>
+                  }
+                />
                 <Route path="*" element={<Error />} />
               </Route>
             </Routes>

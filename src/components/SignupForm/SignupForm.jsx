@@ -50,6 +50,7 @@ const SignupForm = ({ onSuccess }) => {
           value={email}
           placeholder="example@intojazz.com"
           onChange={onEmailChange}
+          autoComplete="email"
         />
         {!!email.length && !isEmailValid && <p>Enter a valid email address.</p>}
 

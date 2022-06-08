@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import AuthService from 'service/firebase/authentication';
 
 const authService = new AuthService();
 
-const AuthServiceContext = React.createContext(authService);
+const AuthServiceContext = createContext(authService);
 export const useAuthServiceContext = () => useContext(AuthServiceContext);
 
 const ServiceProvider = ({ children }) => (
