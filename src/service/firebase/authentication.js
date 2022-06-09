@@ -35,9 +35,16 @@ export default class AuthService {
         return;
       }
 
-      user.emailVerified
-        ? setUser(user.uid)
-        : this.logout().then(() => onUnverified());
+      if (user.emailVerified) {
+        setUser(user.uid);
+        return;
+      }
+
+      this.logout().then(
+        () =>
+          user.metadata.createdAt !== user.metadata.lastLoginAt &&
+          onUnverified()
+      );
     });
   }
 

@@ -10,13 +10,18 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: '80%',
   maxWidth: '500px',
-  bgcolor: 'background.paper',
-  boxShadow: 24,
+  backgroundColor: 'white',
+  borderRadius: 3,
   p: 5,
 };
 
 const CustomModal = ({ title, description, content, ...others }) => (
-  <Modal {...others} aria-labelledby={title} aria-describedby={description}>
+  <Modal
+    {...others}
+    aria-labelledby={title}
+    aria-describedby={description}
+    BackdropProps={{ sx: { backgroundColor: 'rgba(0,0,0,0.2)' } }}
+  >
     <Box sx={style}>
       <h1>{title}</h1>
       {content}

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import CustomModal from 'components/CustomModal/CustomModal';
+import CustomModal from 'components/CustomModal';
 
 const initialState = {
   open: false,
