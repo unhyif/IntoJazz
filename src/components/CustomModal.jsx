@@ -15,15 +15,21 @@ const style = {
   p: 5,
 };
 
-const CustomModal = ({ title, description, content, ...others }) => (
+const CustomModal = ({ title, description, content, open, onClose }) => (
   <Modal
-    {...others}
-    aria-labelledby={title}
+    open={open}
+    onClose={onClose}
+    aria-labelledby="title"
     aria-describedby={description}
     BackdropProps={{ sx: { backgroundColor: 'rgba(0,0,0,0.2)' } }}
   >
     <Box sx={style}>
-      <h1>{title}</h1>
+      <header>
+        <h1 id="title">{title}</h1>
+        <button onClick={onClose} aria-label="close">
+          &times;
+        </button>
+      </header>
       {content}
     </Box>
   </Modal>

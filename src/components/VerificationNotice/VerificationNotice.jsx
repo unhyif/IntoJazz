@@ -2,8 +2,8 @@ import React from 'react';
 
 const VerificationNotice = () => (
   <p>
-    Your email has not been verified yet. Please verify your email to enjoy all
-    of our services.
+    Your email address has not been verified yet. Please check your email to
+    enjoy all of our services.
   </p>
 );
 

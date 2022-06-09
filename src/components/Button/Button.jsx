@@ -11,8 +11,14 @@ const Button = ({
   disabled = false,
   bgColor = 'white',
   onClick = noFunction,
+  label,
 }) => (
-  <button className={cn(bgColor)} disabled={disabled} onClick={onClick}>
+  <button
+    className={cn(bgColor)}
+    disabled={disabled}
+    onClick={onClick}
+    aria-label={label}
+  >
     {content}
   </button>
 );

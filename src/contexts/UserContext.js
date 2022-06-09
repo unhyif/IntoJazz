@@ -16,7 +16,7 @@ const UserProvider = ({ children }) => {
   const onUnverified = () =>
     openModal({
       title: 'Unverified Email',
-      description: 'Please verify your email to enjoy all of our services.',
+      description: 'Please check your email to enjoy all of our services.',
       content: <VerificationNotice />,
     });
   useEffect(() => authService.setAuthStateObserver(setUser, onUnverified), []);
