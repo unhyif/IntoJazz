@@ -2,11 +2,11 @@ import { firebaseApp } from './config';
 import {
   getAuth,
   GoogleAuthProvider,
-  FacebookAuthProvider,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   sendEmailVerification,
   signInWithEmailAndPassword,
+  signInWithRedirect,
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
@@ -36,7 +36,7 @@ export default class AuthService {
   constructor() {
     this.auth = getAuth(firebaseApp);
     this.googleProvider = new GoogleAuthProvider();
-    this.facebookProvider = new FacebookAuthProvider();
+    this.onMobile = /Mobi|Android/i.test(navigator.userAgent);
   }
 
   setAuthStateObserver(setUser, onUnverified) {
@@ -83,12 +83,16 @@ export default class AuthService {
     }
   }
 
-  loginWithProvider(name) {
-    return signInWithPopup(this.auth, this.getProvider(name))
-      .then(result => saveToLocalStorage(result.user.uid))
-      .catch(e => {
-        throw new Error(getErrorMessage(e.code));
-      });
+  // TODO: Check if it works on mobile
+  async loginWithProvider(name) {
+    try {
+      const result = this.onMobile
+        ? await signInWithRedirect(this.auth, this.getProvider(name))
+        : await signInWithPopup(this.auth, this.getProvider(name));
+      saveToLocalStorage(result.user.uid);
+    } catch (e) {
+      throw new Error(getErrorMessage(e.code));
+    }
   }
 
   logout() {

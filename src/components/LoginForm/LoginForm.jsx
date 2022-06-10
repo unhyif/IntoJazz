@@ -85,12 +85,6 @@ const LoginForm = () => {
           onClick={() => onLoginWithProvider('google')}
         />
 
-        <Button
-          content="Log in with Facebook Account"
-          theme="facebook"
-          onClick={() => onLoginWithProvider('facebook')}
-        />
-
         <Link to="/signup">I want to create a new account with email</Link>
       </div>
     </>
