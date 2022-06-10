@@ -1,10 +1,13 @@
 import { firebaseApp } from './config';
 import {
   getAuth,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   sendEmailVerification,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from 'firebase/auth';
 
@@ -16,16 +19,24 @@ function getErrorMessage(errorCode) {
       return 'There is no existing account corresponding to this email.';
     case 'auth/wrong-password':
       return 'The password is incorrect.';
+    case 'auth/cancelled-popup-request':
+      return 'The login popups got cancelled due to successively triggered popup operations.';
+    case 'auth/popup-closed-by-user':
+      return 'The login popup got closed by the user.';
     default:
       return `[${errorCode}]: Please report it to us.`;
   }
 }
 
-const AUTHENTICATED_USER = 'authenticated_user';
+function saveToLocalStorage(payload) {
+  localStorage.setItem('authenticated_user', JSON.stringify(payload));
+}
 
 export default class AuthService {
   constructor() {
     this.auth = getAuth(firebaseApp);
+    this.googleProvider = new GoogleAuthProvider();
+    this.facebookProvider = new FacebookAuthProvider();
   }
 
   setAuthStateObserver(setUser, onUnverified) {
@@ -56,14 +67,25 @@ export default class AuthService {
       });
   }
 
-  login(email, password) {
+  loginWithEmail(email, password) {
     return signInWithEmailAndPassword(this.auth, email, password)
-      .then(userCredential =>
-        localStorage.setItem(
-          AUTHENTICATED_USER,
-          JSON.stringify(userCredential.user.uid)
-        )
-      )
+      .then(userCredential => saveToLocalStorage(userCredential.user.uid))
+      .catch(e => {
+        throw new Error(getErrorMessage(e.code));
+      });
+  }
+
+  getProvider(name) {
+    try {
+      return this[`${name}Provider`];
+    } catch {
+      throw new Error(`${name} provider is not registered.`);
+    }
+  }
+
+  loginWithProvider(name) {
+    return signInWithPopup(this.auth, this.getProvider(name))
+      .then(result => saveToLocalStorage(result.user.uid))
       .catch(e => {
         throw new Error(getErrorMessage(e.code));
       });
@@ -71,9 +93,7 @@ export default class AuthService {
 
   logout() {
     return signOut(this.auth)
-      .then(() =>
-        localStorage.setItem(AUTHENTICATED_USER, JSON.stringify(null))
-      )
+      .then(() => saveToLocalStorage(null))
       .catch(e => console.error(e.code));
   }
 }

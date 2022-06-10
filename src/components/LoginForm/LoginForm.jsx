@@ -17,7 +17,7 @@ const LoginForm = () => {
   const closeModal = useModalHandlersContext().closeModal;
 
   /* event handlers */
-  const onSubmit = e => {
+  const onLoginWithEmail = e => {
     e.preventDefault();
     errorMessage && setErrorMessage('');
 
@@ -31,47 +31,69 @@ const LoginForm = () => {
     if (!(isEmailValid && isPasswordValid)) return;
 
     authService
-      .login(email, password)
+      .loginWithEmail(email, password)
       .then(() => closeModal())
       .catch(e => setErrorMessage(e.message));
   };
 
+  const onLoginWithProvider = name =>
+    authService
+      .loginWithProvider(name.toLowerCase())
+      .then(() => closeModal())
+      .catch(e => setErrorMessage(e.message));
+
   return (
-    <form onSubmit={onSubmit}>
-      <label htmlFor="email">Email</label>
-      <input
-        ref={emailRef}
-        id="email"
-        name="email"
-        defaultValue=""
-        placeholder="example@intojazz.com"
-        autoComplete="email"
-      />
-      {!isEmailValid && <p>Enter a valid email address.</p>}
+    <>
+      <form onSubmit={onLoginWithEmail}>
+        <label htmlFor="email">Email</label>
+        <input
+          ref={emailRef}
+          id="email"
+          name="email"
+          defaultValue=""
+          placeholder="example@intojazz.com"
+          autoComplete="email"
+        />
+        {!isEmailValid && <p>Enter a valid email address.</p>}
 
-      <label htmlFor="password">Password</label>
-      <input
-        ref={passwordRef}
-        type="password"
-        id="password"
-        name="password"
-        defaultValue=""
-        placeholder="********"
-        autoComplete="current-password"
-      />
-      {!isPasswordValid && (
-        <p>
-          Use more than 8 letters containing digits, upper/lowercase characters
-          and special characters.
-        </p>
-      )}
+        <label htmlFor="password">Password</label>
+        <input
+          ref={passwordRef}
+          type="password"
+          id="password"
+          name="password"
+          defaultValue=""
+          placeholder="********"
+          autoComplete="current-password"
+        />
+        {!isPasswordValid && (
+          <p>
+            Use more than 8 letters containing digits, upper/lowercase
+            characters and special characters.
+          </p>
+        )}
 
-      {errorMessage && <p>{errorMessage}</p>}
+        <Button content="Log in" />
+      </form>
 
-      <Button content="Log in"></Button>
+      <div>
+        {errorMessage && <p>{errorMessage}</p>}
 
-      <Link to="/signup">New to IntoJazz?</Link>
-    </form>
+        <Button
+          content="Log in with Google Account"
+          theme="google"
+          onClick={() => onLoginWithProvider('google')}
+        />
+
+        <Button
+          content="Log in with Facebook Account"
+          theme="facebook"
+          onClick={() => onLoginWithProvider('facebook')}
+        />
+
+        <Link to="/signup">I want to create a new account with email</Link>
+      </div>
+    </>
   );
 };
 
