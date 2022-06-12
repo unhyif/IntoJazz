@@ -2,8 +2,21 @@ import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 // import { Dialog, DialogContent } from '@mui/material';
+// import { Fade } from '@mui/material';
 
-const style = {
+// import { useSpring, animated } from 'react-spring';
+// const Fade = ({ children, open }) => {
+//   const transition = useSpring({
+//     from: { opacity: 0 },
+//     to: { opacity: open ? 1 : 0 },
+//     // from: { opacity: open ? 0 : 1 },
+//     // to: { opacity: open ? 1 : 0 },
+//   });
+
+//   return <animated.div style={transition}>{children}</animated.div>;
+// };
+
+const boxStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -23,7 +36,7 @@ const CustomModal = ({ title, description, content, open, onClose }) => (
     aria-describedby={description}
     BackdropProps={{ sx: { backgroundColor: 'rgba(0,0,0,0.2)' } }}
   >
-    <Box sx={style}>
+    <Box sx={boxStyle}>
       <header>
         <h1 id="title">{title}</h1>
         <button onClick={onClose} aria-label="close">

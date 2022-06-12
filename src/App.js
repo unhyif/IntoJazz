@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ServiceProvider from 'contexts/ServiceContext';
-import ModalHandlersProvider from 'contexts/ModalHandlersContext';
+import ModalDispatchProvider from 'contexts/ModalDispatchContext';
 import UserProvider from 'contexts/UserContext';
 import Layout from 'layouts/Layout';
 import Home from 'routes/Home/Home';
@@ -16,7 +16,7 @@ const App = () => (
     {/* <ErrorBoundary> */}
     <Suspense fallback={<div />}>
       <ServiceProvider>
-        <ModalHandlersProvider>
+        <ModalDispatchProvider>
           <UserProvider>
             <Routes>
               <Route path="/" element={<Layout />}>
@@ -33,7 +33,7 @@ const App = () => (
               </Route>
             </Routes>
           </UserProvider>
-        </ModalHandlersProvider>
+        </ModalDispatchProvider>
       </ServiceProvider>
     </Suspense>
     {/* </ErrorBoundary> */}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useUserContext } from 'contexts/UserContext';
 import { useAuthServiceContext } from 'contexts/ServiceContext';
-import { useModalHandlersContext } from 'contexts/ModalHandlersContext';
+import { useModalDispatchContext } from 'contexts/ModalDispatchContext';
 import classNames from 'classnames/bind';
 import LoginForm from 'components/LoginForm/LoginForm';
 import Button from 'components/Button/Button';
@@ -14,14 +14,17 @@ const Header = () => {
   /* contexts */
   const user = useUserContext();
   const authService = useAuthServiceContext();
-  const openModal = useModalHandlersContext().openModal;
+  const modalDispatch = useModalDispatchContext();
 
   /* event handlers */
   const onLogin = () =>
-    openModal({
-      title: 'Log in',
-      description: 'Log in with email or other providers',
-      content: <LoginForm />,
+    modalDispatch({
+      type: 'OPEN',
+      payload: {
+        title: 'Log in',
+        description: 'Log in with email or other providers',
+        content: <LoginForm />,
+      },
     });
   const onLogout = () => authService.logout();
 

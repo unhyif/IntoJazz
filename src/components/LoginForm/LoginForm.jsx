@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuthServiceContext } from 'contexts/ServiceContext';
-import { useModalHandlersContext } from 'contexts/ModalHandlersContext';
+import { useModalDispatchContext } from 'contexts/ModalDispatchContext';
 import { validate } from 'common/validate';
 import Button from 'components/Button/Button';
-import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   /* states */
@@ -14,7 +14,7 @@ const LoginForm = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const authService = useAuthServiceContext();
-  const closeModal = useModalHandlersContext().closeModal;
+  const modalDispatch = useModalDispatchContext();
 
   /* event handlers */
   const onLoginWithEmail = e => {
@@ -32,14 +32,14 @@ const LoginForm = () => {
 
     authService
       .loginWithEmail(email, password)
-      .then(() => closeModal())
+      .then(() => modalDispatch({ type: 'CLOSE' }))
       .catch(e => setErrorMessage(e.message));
   };
 
   const onLoginWithProvider = name =>
     authService
       .loginWithProvider(name.toLowerCase())
-      .then(() => closeModal())
+      .then(() => modalDispatch({ type: 'CLOSE' }))
       .catch(e => setErrorMessage(e.message));
 
   return (
