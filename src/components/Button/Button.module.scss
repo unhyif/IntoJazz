@@ -1,0 +1,16 @@
+@use 'sass:color';
+@use '../../common/scss/variables' as *;
+
+@mixin bgColor($color) {
+  background: $color;
+  &:hover {
+    background: color.scale($color, $lightness: -5%);
+  }
+}
+
+.btn {
+  @include bgColor($sub-color);
+  color: white;
+  border-radius: 0.75em;
+  padding: 0.75em 1em;
+}

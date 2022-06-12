@@ -1,50 +1,50 @@
 import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import { Fade } from '@mui/material';
+import classNames from 'classnames/bind';
+import styles from './CustomModal.module.scss';
 // import { Dialog, DialogContent } from '@mui/material';
-// import { Fade } from '@mui/material';
 
-// import { useSpring, animated } from 'react-spring';
-// const Fade = ({ children, open }) => {
-//   const transition = useSpring({
-//     from: { opacity: 0 },
-//     to: { opacity: open ? 1 : 0 },
-//     // from: { opacity: open ? 0 : 1 },
-//     // to: { opacity: open ? 1 : 0 },
-//   });
-
-//   return <animated.div style={transition}>{children}</animated.div>;
-// };
+const cn = classNames.bind(styles);
 
 const boxStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '80%',
-  maxWidth: '500px',
+  width: '40rem',
   backgroundColor: 'white',
   borderRadius: 3,
-  p: 5,
+  p: 3,
 };
 
 const CustomModal = ({ title, description, content, open, onClose }) => (
   <Modal
     open={open}
     onClose={onClose}
-    aria-labelledby="title"
+    aria-labelledby="modal__title"
     aria-describedby={description}
     BackdropProps={{ sx: { backgroundColor: 'rgba(0,0,0,0.2)' } }}
   >
-    <Box sx={boxStyle}>
-      <header>
-        <h1 id="title">{title}</h1>
-        <button onClick={onClose} aria-label="close">
-          &times;
-        </button>
-      </header>
-      {content}
-    </Box>
+    <Fade in={open} timeout={{ enter: 500, exit: 0 }}>
+      <Box sx={boxStyle}>
+        <header className={cn('header')}>
+          <button
+            aria-label="close"
+            className={cn('closeBtn')}
+            onClick={onClose}
+          >
+            &times;
+          </button>
+        </header>
+
+        <h1 id="modal__title" className={cn('title')}>
+          {title}
+        </h1>
+        {content}
+      </Box>
+    </Fade>
   </Modal>
 );
 

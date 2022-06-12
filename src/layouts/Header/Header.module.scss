@@ -1,5 +1,8 @@
 @use '../../common/scss/variables' as *;
 
-header {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 0 $base-side-padding;
 }

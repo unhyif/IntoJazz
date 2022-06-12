@@ -1,0 +1,27 @@
+@use 'sass:color';
+@use '../../common/scss/variables' as *;
+
+.btn {
+  background: none;
+  border: 1px solid $black;
+  border-radius: 0.75em;
+  padding: 0.5em 1em;
+  width: 100%;
+
+  &:hover {
+    background: color.scale($light-gray, $lightness: 70%);
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper__icon {
+  font-size: 2rem;
+}
+
+.wrapper__content {
+  margin: 0 auto;
+}

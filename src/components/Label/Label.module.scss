@@ -1,0 +1,6 @@
+@use '../../common/scss/variables' as *;
+
+.label {
+  color: $main-color;
+  font-weight: bold;
+}

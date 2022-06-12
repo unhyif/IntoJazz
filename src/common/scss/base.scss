@@ -1,14 +1,23 @@
+@use 'sass:color';
+@use './variables' as *;
 @import-normalize;
 
 * {
   box-sizing: border-box;
   margin: 0;
+  outline-color: color.scale($sub-color, $lightness: 30%);
 }
 
 a {
   text-decoration: none;
 }
 
+input {
+  font: inherit;
+}
+
 button {
   border: none;
+  cursor: pointer;
+  font: inherit;
 }

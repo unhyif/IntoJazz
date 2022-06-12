@@ -3,7 +3,17 @@ import { Link } from 'react-router-dom';
 import { useAuthServiceContext } from 'contexts/ServiceContext';
 import { useModalDispatchContext } from 'contexts/ModalDispatchContext';
 import { validate } from 'common/validate';
+import LabelInputWrapper from 'components/LabelInputWrapper/LabelInputWrapper';
+import Label from 'components/Label/Label';
+import Input from 'components/Input/Input';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import Button from 'components/Button/Button';
+import SocialLoginButton from 'components/SocialLoginButton/SocialLoginButton';
+import { FcGoogle } from 'react-icons/fc';
+import classNames from 'classnames/bind';
+import styles from './LoginForm.module.scss';
+
+const cn = classNames.bind(styles);
 
 const LoginForm = () => {
   /* states */
@@ -36,7 +46,7 @@ const LoginForm = () => {
       .catch(e => setErrorMessage(e.message));
   };
 
-  const onLoginWithProvider = name =>
+  const onSocialLogin = name =>
     authService
       .loginWithProvider(name.toLowerCase())
       .then(() => modalDispatch({ type: 'CLOSE' }))
@@ -45,48 +55,72 @@ const LoginForm = () => {
   return (
     <>
       <form onSubmit={onLoginWithEmail}>
-        <label htmlFor="email">Email</label>
-        <input
-          ref={emailRef}
-          id="email"
-          name="email"
-          defaultValue=""
-          placeholder="example@intojazz.com"
-          autoComplete="email"
-        />
-        {!isEmailValid && <p>Enter a valid email address.</p>}
-
-        <label htmlFor="password">Password</label>
-        <input
-          ref={passwordRef}
-          type="password"
-          id="password"
-          name="password"
-          defaultValue=""
-          placeholder="********"
-          autoComplete="current-password"
-        />
-        {!isPasswordValid && (
-          <p>
-            Use more than 8 letters containing digits, upper/lowercase
-            characters and special characters.
-          </p>
+        <LabelInputWrapper>
+          <Label htmlFor="email">Email</Label>
+          <Input
+            ref={emailRef}
+            id="email"
+            name="email"
+            defaultValue=""
+            placeholder="example@intojazz.com"
+            autoComplete="email"
+          />
+        </LabelInputWrapper>
+        {isEmailValid || (
+          <ErrorMessage style={{ textAlign: 'right' }}>
+            Enter a valid email address.
+          </ErrorMessage>
         )}
 
-        <Button content="Log in" />
+        <LabelInputWrapper>
+          <Label htmlFor="password">Password</Label>
+          <Input
+            ref={passwordRef}
+            type="password"
+            id="password"
+            name="password"
+            defaultValue=""
+            placeholder="********"
+            autoComplete="current-password"
+          />
+        </LabelInputWrapper>
+        {isPasswordValid || (
+          <ErrorMessage style={{ textAlign: 'right' }}>
+            Use more than 8 letters containing digits,
+            <br />
+            upper/lowercase characters and special characters.
+          </ErrorMessage>
+        )}
+
+        {errorMessage && (
+          <ErrorMessage
+            style={{
+              textAlign: 'center',
+              marginTop: '1em',
+            }}
+          >
+            {errorMessage}
+          </ErrorMessage>
+        )}
+
+        <Button content="Log in" style={{ width: '100%', marginTop: '2em' }} />
       </form>
 
-      <div>
-        {errorMessage && <p>{errorMessage}</p>}
-
-        <Button
-          content="Log in with Google Account"
-          theme="google"
-          onClick={() => onLoginWithProvider('google')}
-        />
-
-        <Link to="/signup">I want to create a new account with email</Link>
+      <div className={cn('social-login')}>
+        <span>Social Login</span>
       </div>
+
+      <SocialLoginButton
+        icon={<FcGoogle />}
+        content="Log in with Google Account"
+        onClick={() => onSocialLogin('google')}
+      />
+
+      <Link to="/signup">
+        <p className={cn('signup')}>
+          I want to create a new account with email
+        </p>
+      </Link>
     </>
   );
 };

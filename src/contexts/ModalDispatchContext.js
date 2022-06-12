@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { useLocation } from 'react-router-dom';
 import { modalReducer } from 'reducers/modalReducer';
-import CustomModal from 'components/CustomModal';
+import CustomModal from 'components/CustomModal/CustomModal';
 
 const initialState = {
   open: false,

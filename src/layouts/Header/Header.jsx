@@ -29,12 +29,12 @@ const Header = () => {
   const onLogout = () => authService.logout();
 
   return (
-    <header>
+    <header className={cn('header')}>
       <Link to="/">IntoJazz</Link>
       {user ? (
-        <Button content="Log out" bgColor="lightPurple" onClick={onLogout} />
+        <Button content="Log out" onClick={onLogout} />
       ) : (
-        <Button content="Log in" bgColor="lightPurple" onClick={onLogin} />
+        <Button content="Log in" onClick={onLogin} />
       )}
     </header>
   );

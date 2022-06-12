@@ -7,15 +7,16 @@ function noFunction() {}
 const cn = classNames.bind(styles);
 
 const Button = ({
-  label,
   content,
-  theme = 'white',
+  bgColor,
+  style,
   disabled = false,
   onClick = noFunction,
 }) => (
   <button
-    aria-label={label}
-    className={cn(theme)}
+    aria-label={content}
+    className={cn('btn', { [bgColor]: bgColor })}
+    style={style}
     disabled={disabled}
     onClick={onClick}
   >

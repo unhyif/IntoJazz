@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+
+  & ~ .wrapper {
+    margin-top: 1em;
+  }
+}

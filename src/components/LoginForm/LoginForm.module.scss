@@ -1,0 +1,31 @@
+@use '../../common/scss/variables' as *;
+
+.social-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  color: $gray;
+  margin: 1.5em 0;
+
+  & span {
+    width: 25%;
+    text-align: center;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: $light-gray;
+  }
+}
+
+.signup {
+  text-align: center;
+  color: $pink;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-top: 1.5em;
+}
