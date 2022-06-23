@@ -6,6 +6,7 @@ import { useModalDispatchContext } from 'contexts/ModalDispatchContext';
 import classNames from 'classnames/bind';
 import LoginForm from 'components/LoginForm/LoginForm';
 import Button from 'components/Button/Button';
+import { FaGuitar } from 'react-icons/fa';
 import styles from './Header.module.scss';
 
 const cn = classNames.bind(styles);
@@ -30,7 +31,10 @@ const Header = () => {
 
   return (
     <header className={cn('header')}>
-      <Link to="/">IntoJazz</Link>
+      <Link to="/" className={cn('brand')}>
+        <FaGuitar />
+        <span>IntoJazz</span>
+      </Link>
       {user ? (
         <Button content="Log out" onClick={onLogout} />
       ) : (

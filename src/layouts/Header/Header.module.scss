@@ -4,5 +4,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 $base-side-padding;
+  padding: 1em $base-side-padding;
+  z-index: 2;
+}
+
+.brand {
+  font-family: 'Caveat Brush', cursive;
+  color: $main-color;
+  font-size: 3rem;
+  font-weight: bold;
+  display: flex;
+  gap: 0.1em;
+
+  & svg {
+    filter: drop-shadow(1px 1px 0 white);
+    color: rgb(170, 100, 50);
+  }
+
+  & span {
+    text-shadow: -0.5px -0.5px 0 white, 0.5px -0.5px 0 white,
+      -0.5px 0.5px 0 white, 0.5px 0.5px 0 white;
+  }
 }

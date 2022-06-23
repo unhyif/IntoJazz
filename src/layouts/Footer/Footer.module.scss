@@ -1,0 +1,16 @@
+.footer {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  padding: 1em 2em;
+  z-index: 2;
+
+  & p {
+    margin: 0 auto;
+  }
+
+  & a {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}

@@ -1,9 +1,10 @@
 import React from 'react';
+import styles from './Footer.module.scss';
 
 const Footer = () => (
-  <footer>
+  <footer className={styles.footer}>
     <p>© 2022 IntoJazz. All rights reserved.</p>
-    <a href="mailto:unhyif@gmail.com">CONTACT</a>
+    <a href="mailto:unhyif@gmail.com">contact</a>
   </footer>
 );
 
