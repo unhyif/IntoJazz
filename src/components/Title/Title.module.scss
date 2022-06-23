@@ -1,0 +1,15 @@
+@use '../../common/scss/variables' as *;
+
+.title {
+  text-align: center;
+  color: $main-color;
+  margin-bottom: 1.5em;
+
+  &.md {
+    font-size: 2.5rem;
+  }
+
+  &.lg {
+    font-size: 3rem;
+  }
+}

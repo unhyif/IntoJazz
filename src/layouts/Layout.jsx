@@ -1,17 +1,18 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header/Header';
-import Container from 'layouts/Container/Container';
+import Body from 'layouts/Body/Body';
 import Footer from './Footer/Footer';
+import styles from './Layout.module.scss';
 
 const Layout = () => (
-  <>
+  <div className={styles.layout}>
     <Header />
-    <Container>
+    <Body>
       <Outlet />
-    </Container>
+    </Body>
     <Footer />
-  </>
+  </div>
 );
 
 export default Layout;

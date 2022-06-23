@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useModalDispatchContext } from './ModalDispatchContext';
 import { useAuthServiceContext } from './ServiceContext';
-import VerificationNotice from 'components/VerificationNotice/VerificationNotice';
+import Notice from 'components/Notice/Notice';
 
 const UserContext = createContext(null);
 export const useUserContext = () => useContext(UserContext);
@@ -19,7 +19,13 @@ const UserProvider = ({ children }) => {
       payload: {
         title: 'Unverified Email',
         description: 'Please check your email to enjoy all of our services.',
-        content: <VerificationNotice />,
+        content: (
+          <Notice>
+            Your email address has not been verified yet.
+            <br />
+            Please check your email to enjoy all of our services.
+          </Notice>
+        ),
       },
     });
   useEffect(() => authService.setAuthStateObserver(setUser, onUnverified), []);

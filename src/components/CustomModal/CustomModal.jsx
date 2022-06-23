@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { Fade } from '@mui/material';
+import Title from 'components/Title/Title';
 import classNames from 'classnames/bind';
 import styles from './CustomModal.module.scss';
 // import { Dialog, DialogContent } from '@mui/material';
@@ -13,7 +14,7 @@ const boxStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '45rem',
+  width: 'min(100%, 45rem)',
   backgroundColor: 'white',
   borderRadius: 3,
   p: 3,
@@ -39,9 +40,7 @@ const CustomModal = ({ title, description, content, open, onClose }) => (
           </button>
         </header>
 
-        <h1 id="modal__title" className={cn('title')}>
-          {title}
-        </h1>
+        <Title>{title}</Title>
         {content}
       </Box>
     </Fade>

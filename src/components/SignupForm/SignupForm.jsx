@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useAuthServiceContext } from 'contexts/ServiceContext';
 import { validate } from 'common/validate';
+import LabelInputWrapper from 'components/LabelInputWrapper/LabelInputWrapper';
+import Label from 'components/Label/Label';
+import Input from 'components/Input/Input';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import Button from 'components/Button/Button';
 
 const SignupForm = ({ onSuccess }) => {
@@ -46,51 +50,74 @@ const SignupForm = ({ onSuccess }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        name="email"
-        value={email}
-        placeholder="example@intojazz.com"
-        onChange={onEmailChange}
-        autoComplete="email"
-      />
-      {!!email.length && !isEmailValid && <p>Enter a valid email address.</p>}
+      <LabelInputWrapper>
+        <Label htmlFor="email">Email</Label>
+        <Input
+          id="email"
+          name="email"
+          value={email}
+          placeholder="example@intojazz.com"
+          onChange={onEmailChange}
+          autoComplete="email"
+        />
+      </LabelInputWrapper>
+      {!!email.length && !isEmailValid && (
+        <ErrorMessage style={{ textAlign: 'right' }}>
+          Enter a valid email address.
+        </ErrorMessage>
+      )}
 
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        value={password}
-        placeholder="********"
-        onChange={onPasswordChange}
-      />
+      <LabelInputWrapper>
+        <Label htmlFor="password">Password</Label>
+        <Input
+          type="password"
+          id="password"
+          name="password"
+          value={password}
+          placeholder="********"
+          onChange={onPasswordChange}
+        />
+      </LabelInputWrapper>
       {!!password.length && !isPasswordValid && (
-        <p>
+        <ErrorMessage style={{ textAlign: 'right' }}>
           Use more than 8 letters containing digits, upper/lowercase characters
           and special characters.
-        </p>
+        </ErrorMessage>
       )}
 
-      <label htmlFor="password-confirm">Confirm Password</label>
-      <input
-        type="password"
-        id="password-confirm"
-        name="password-confirm"
-        value={passwordConfirm}
-        placeholder="********"
-        onChange={onPasswordConfirmChange}
-      />
-      {!!password.length && !isPasswordConfirmValid && (
-        <p>It must match the password.</p>
+      <LabelInputWrapper>
+        <Label htmlFor="password-confirm">Confirm Password</Label>
+        <Input
+          type="password"
+          id="password-confirm"
+          name="password-confirm"
+          value={passwordConfirm}
+          placeholder="********"
+          onChange={onPasswordConfirmChange}
+        />
+      </LabelInputWrapper>
+      {!!passwordConfirm.length && !isPasswordConfirmValid && (
+        <ErrorMessage style={{ textAlign: 'right' }}>
+          It must match the password.
+        </ErrorMessage>
       )}
 
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && (
+        <ErrorMessage
+          style={{
+            fontSize: '1.5rem',
+            textAlign: 'center',
+            marginTop: '2em',
+          }}
+        >
+          {errorMessage}
+        </ErrorMessage>
+      )}
 
       <Button
         content="Sign Up"
         disabled={!(isEmailValid && isPasswordValid && isPasswordConfirmValid)}
+        style={{ width: '100%', marginTop: '2em' }}
       ></Button>
     </form>
   );

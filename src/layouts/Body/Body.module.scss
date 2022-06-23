@@ -1,7 +1,8 @@
 @use '../../common/scss/variables' as *;
 
-.container {
+.body {
   padding: 0 $base-side-padding;
-  max-width: 144rem;
-  margin: 0 auto;
+  width: min(100%, 144rem);
+  align-self: center;
+  flex-grow: 1;
 }

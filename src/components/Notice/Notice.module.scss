@@ -1,0 +1,7 @@
+@use '../../common/scss/variables' as *;
+
+.notice {
+  color: $gray;
+  text-align: center;
+  line-height: calc(1em + 0.5rem);
+}
