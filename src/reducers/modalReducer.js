@@ -4,10 +4,8 @@ export function modalReducer(state, action) {
       return { open: true, ...action.payload };
     case 'CLOSE':
       return {
+        ...state,
         open: false,
-        title: null,
-        description: null,
-        content: null,
       };
     default:
       throw new Error('This type is not registered in modalReducer.');

@@ -13,7 +13,7 @@ const boxStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '40rem',
+  width: '45rem',
   backgroundColor: 'white',
   borderRadius: 3,
   p: 3,
@@ -27,7 +27,7 @@ const CustomModal = ({ title, description, content, open, onClose }) => (
     aria-describedby={description}
     BackdropProps={{ sx: { backgroundColor: 'rgba(0,0,0,0.2)' } }}
   >
-    <Fade in={open} timeout={{ enter: 500, exit: 0 }}>
+    <Fade in={open} timeout={{ enter: 500, exit: 250 }}>
       <Box sx={boxStyle}>
         <header className={cn('header')}>
           <button

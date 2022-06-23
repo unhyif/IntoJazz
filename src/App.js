@@ -14,10 +14,10 @@ const Error = lazy(() => import('routes/Error/Error'));
 const App = () => (
   <BrowserRouter>
     {/* <ErrorBoundary> */}
-    <Suspense fallback={<div />}>
-      <ServiceProvider>
-        <ModalDispatchProvider>
-          <UserProvider>
+    <ServiceProvider>
+      <ModalDispatchProvider>
+        <UserProvider>
+          <Suspense fallback={<div />}>
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
@@ -32,10 +32,10 @@ const App = () => (
                 <Route path="*" element={<Error />} />
               </Route>
             </Routes>
-          </UserProvider>
-        </ModalDispatchProvider>
-      </ServiceProvider>
-    </Suspense>
+          </Suspense>
+        </UserProvider>
+      </ModalDispatchProvider>
+    </ServiceProvider>
     {/* </ErrorBoundary> */}
   </BrowserRouter>
 );

@@ -16,12 +16,12 @@
 .wrapper {
   display: flex;
   align-items: center;
+
+  & span {
+    margin: 0 auto;
+  }
 }
 
 .wrapper__icon {
   font-size: 2rem;
-}
-
-.wrapper__content {
-  margin: 0 auto;
 }

@@ -95,8 +95,9 @@ const LoginForm = () => {
         {errorMessage && (
           <ErrorMessage
             style={{
+              fontSize: '1.5rem',
               textAlign: 'center',
-              marginTop: '1em',
+              marginTop: '2em',
             }}
           >
             {errorMessage}

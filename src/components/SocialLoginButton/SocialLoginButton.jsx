@@ -7,8 +7,8 @@ const cn = classNames.bind(styles);
 const SocialLoginButton = ({ icon, content, onClick }) => (
   <button aria-label={content} className={cn('btn')} onClick={onClick}>
     <div className={cn('wrapper')}>
-      <div class={cn('wrapper__icon')}>{icon}</div>
-      <span className={cn('wrapper__content')}>{content}</span>
+      <div className={cn('wrapper__icon')}>{icon}</div>
+      <span>{content}</span>
     </div>
   </button>
 );
