@@ -5,7 +5,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  outline-color: color.scale($sub-color, $lightness: 30%);
+  outline-color: color.scale($light-main-color, $lightness: 30%);
 }
 
 a {

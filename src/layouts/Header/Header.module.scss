@@ -14,7 +14,7 @@
   font-size: 3rem;
   font-weight: bold;
   display: flex;
-  gap: 0.1em;
+  gap: 0.2em;
 
   & svg {
     filter: drop-shadow(1px 1px 0 white);
@@ -22,7 +22,7 @@
   }
 
   & span {
-    text-shadow: -0.5px -0.5px 0 white, 0.5px -0.5px 0 white,
-      -0.5px 0.5px 0 white, 0.5px 0.5px 0 white;
+    text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+      1px 1px 0 white;
   }
 }

@@ -9,7 +9,7 @@
 }
 
 .btn {
-  @include bgColor($sub-color);
+  @include bgColor($light-main-color);
   color: white;
   border-radius: 0.75em;
   padding: 0.75em 1em;
