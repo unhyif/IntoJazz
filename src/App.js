@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ServiceProvider from 'contexts/ServiceContext';
 import ModalDispatchProvider from 'contexts/ModalDispatchContext';
 import UserProvider from 'contexts/UserContext';
-import Layout from 'layouts/Layout';
+import Layout from 'layout/Layout';
 import Home from 'routes/Home/Home';
 import GuestOnly from 'components/GuestOnly';
 

@@ -8,6 +8,7 @@ import { ImSearch } from 'react-icons/im';
 import { RiTeamFill, RiMoneyDollarBoxFill } from 'react-icons/ri';
 import classNames from 'classnames/bind';
 import styles from './SearchBar.module.scss';
+import SearchBarColumn from 'components/SearchBarColumn/SearchBarColumn';
 
 const cn = classNames.bind(styles);
 
@@ -35,58 +36,38 @@ const SearchBar = props => {
 
   return (
     <form className={cn('search-bar')} onSubmit={onSubmit}>
-      <div className={cn('search-bar__column')}>
-        <header className={cn('search-bar__header')}>
-          <MdLocationOn />
-          <h3>Location</h3>
-        </header>
-        <input
-          defaultValue={props.defaultLocation}
-          value={location}
-          onChange={onLocationChange}
-          placeholder="Any city"
-        />
-      </div>
-
-      <div className={cn('search-bar__column')}>
-        <header className={cn('search-bar__header')}>
-          <AiFillCalendar />
-          <h3>Date</h3>
-        </header>
-        <input
-          defaultValue={props.defaultDate}
-          value={date}
-          onChange={onDateChange}
-          placeholder="Anytime"
-        />
-      </div>
-
-      <div className={cn('search-bar__column')}>
-        <header className={cn('search-bar__header')}>
-          <RiTeamFill />
-          <h3>Artist</h3>
-        </header>
-        <input
-          defaultValue={props.defaultArtist}
-          value={artist}
-          onChange={onArtistChange}
-          placeholder="Any artist"
-        />
-      </div>
-
-      <div className={cn('search-bar__column')}>
-        <header className={cn('search-bar__header')}>
-          <RiMoneyDollarBoxFill />
-          <h3>Price</h3>
-        </header>
-        <input
-          defaultValue={props.defaultPrice}
-          value={price}
-          onChange={onPriceChange}
-          placeholder="Any price"
-        />
-      </div>
-
+      <SearchBarColumn
+        icon={<MdLocationOn />}
+        title="Location"
+        defaultValue={props.defaultLocation}
+        value={location}
+        onChange={onLocationChange}
+        placeholder="Any city"
+      />
+      <SearchBarColumn
+        icon={<AiFillCalendar />}
+        title="Date"
+        defaultValue={props.defaultDate}
+        value={date}
+        onChange={onDateChange}
+        placeholder="Anytime"
+      />
+      <SearchBarColumn
+        icon={<RiTeamFill />}
+        title="Artist"
+        defaultValue={props.defaultArtist}
+        value={artist}
+        onChange={onArtistChange}
+        placeholder="Any artist"
+      />
+      <SearchBarColumn
+        icon={<RiMoneyDollarBoxFill />}
+        title="Price"
+        defaultValue={props.defaultPrice}
+        value={price}
+        onChange={onPriceChange}
+        placeholder="Any price"
+      />
       <button className={cn('search-btn')}>
         <ImSearch />
       </button>

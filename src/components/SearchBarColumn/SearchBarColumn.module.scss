@@ -1,0 +1,33 @@
+@use '../../styles/variables' as *;
+
+.column {
+  & + .column {
+    border-left: 2px solid $light-gray;
+    padding-left: 1em;
+  }
+
+  & input {
+    text-align: center;
+    color: $gray;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em 1em;
+  }
+}
+
+.header {
+  color: $dark-main-color;
+  font-size: 1.4rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  border-bottom: 2px solid $light-gray;
+  border-bottom-width: 50%;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.75em;
+
+  & svg {
+    font-size: 2.4rem;
+  }
+}
