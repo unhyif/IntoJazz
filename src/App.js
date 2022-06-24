@@ -6,9 +6,9 @@ import UserProvider from 'contexts/UserContext';
 import Layout from 'layouts/Layout';
 import Home from 'routes/Home/Home';
 import GuestOnly from 'components/GuestOnly';
-import ErrorBoundary from 'components/ErrorBoundary';
 
 const Signup = lazy(() => import('routes/Signup/Signup'));
+const Search = lazy(() => import('routes/Search/Search'));
 const Error = lazy(() => import('routes/Error/Error'));
 
 const App = () => (
@@ -29,6 +29,7 @@ const App = () => (
                     </GuestOnly>
                   }
                 />
+                <Route path="search" element={<Search />} />
                 <Route path="*" element={<Error />} />
               </Route>
             </Routes>
