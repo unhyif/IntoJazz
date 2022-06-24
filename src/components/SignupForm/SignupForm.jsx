@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuthServiceContext } from 'contexts/ServiceContext';
+import { useServiceContext } from 'contexts/ServiceContext';
 import { validate } from 'utils/validate';
 import LabelInputWrapper from 'components/LabelInputWrapper/LabelInputWrapper';
 import Label from 'components/Label/Label';
@@ -39,7 +39,7 @@ const SignupForm = ({ onSuccess }) => {
     setIsPasswordConfirmValid(password === passwordConfirm);
   };
 
-  const authService = useAuthServiceContext();
+  const authService = useServiceContext().auth;
   const onSubmit = e => {
     e.preventDefault();
     authService

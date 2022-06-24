@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthServiceContext } from 'contexts/ServiceContext';
+import { useServiceContext } from 'contexts/ServiceContext';
 import { useModalDispatchContext } from 'contexts/ModalDispatchContext';
 import { validate } from 'utils/validate';
 import LabelInputWrapper from 'components/LabelInputWrapper/LabelInputWrapper';
@@ -23,7 +23,7 @@ const LoginForm = () => {
 
   const emailRef = useRef();
   const passwordRef = useRef();
-  const authService = useAuthServiceContext();
+  const authService = useServiceContext().auth;
   const modalDispatch = useModalDispatchContext();
 
   /* event handlers */

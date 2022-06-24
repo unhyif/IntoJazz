@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useModalDispatchContext } from './ModalDispatchContext';
-import { useAuthServiceContext } from './ServiceContext';
+import { useServiceContext } from './ServiceContext';
 import Notice from 'components/Notice/Notice';
 
 const UserContext = createContext(null);
@@ -10,7 +10,7 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem('authenticated_user'))
   );
-  const authService = useAuthServiceContext();
+  const authService = useServiceContext().auth;
 
   const modalDispatch = useModalDispatchContext();
   const onUnverified = () =>

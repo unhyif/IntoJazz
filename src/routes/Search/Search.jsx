@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useServiceContext } from 'contexts/ServiceContext';
+import qs from 'qs';
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
@@ -12,11 +14,10 @@ const Search = () => {
   const artist = searchParams.get('artist');
   const price = searchParams.get('price');
 
-  return (
-    <main className={cn('search')}>
-      {location} {date} {artist} {price}
-    </main>
-  );
+  const concertService = useServiceContext().concert;
+  concertService.search('').then(concerts => console.log(concerts));
+
+  return <main className={cn('search')}></main>;
 };
 
 export default Search;

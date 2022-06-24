@@ -1,15 +1,20 @@
 import React, { createContext, useContext } from 'react';
+import ConcertService from 'service/ticketmaster';
 import AuthService from 'service/firebase/authentication';
 
+const concertService = new ConcertService();
 const authService = new AuthService();
 
-const AuthServiceContext = createContext(authService);
-export const useAuthServiceContext = () => useContext(AuthServiceContext);
+const services = {
+  concert: concertService,
+  auth: authService,
+};
+
+const ServiceContext = createContext(services);
+export const useServiceContext = () => useContext(ServiceContext);
 
 const ServiceProvider = ({ children }) => (
-  <AuthServiceContext.Provider value={authService}>
-    {children}
-  </AuthServiceContext.Provider>
+  <ServiceContext.Provider value={services}>{children}</ServiceContext.Provider>
 );
 
 export default ServiceProvider;
