@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthServiceContext } from 'contexts/ServiceContext';
 import { useModalDispatchContext } from 'contexts/ModalDispatchContext';
-import { validate } from 'common/validate';
+import { validate } from 'utils/validate';
 import LabelInputWrapper from 'components/LabelInputWrapper/LabelInputWrapper';
 import Label from 'components/Label/Label';
 import Input from 'components/Input/Input';

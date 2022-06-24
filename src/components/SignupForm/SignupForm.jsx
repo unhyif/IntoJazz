@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuthServiceContext } from 'contexts/ServiceContext';
-import { validate } from 'common/validate';
+import { validate } from 'utils/validate';
 import LabelInputWrapper from 'components/LabelInputWrapper/LabelInputWrapper';
 import Label from 'components/Label/Label';
 import Input from 'components/Input/Input';
