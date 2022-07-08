@@ -10,7 +10,8 @@ const cn = classNames.bind(styles);
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = searchParams.get('location');
-  const date = searchParams.get('date');
+  const from = searchParams.get('from');
+  const to = searchParams.get('to');
   const artist = searchParams.get('artist');
   const price = searchParams.get('price');
 

@@ -26,7 +26,7 @@ const CustomModal = ({ title, description, content, open, onClose }) => (
     onClose={onClose}
     aria-labelledby="modal__title"
     aria-describedby={description}
-    BackdropProps={{ sx: { backgroundColor: 'rgba(0,0,0,0.2)' } }}
+    BackdropProps={{ sx: { backgroundColor: 'rgba(0,0,0,0.3)' } }}
   >
     <Fade in={open} timeout={{ enter: 500, exit: 250 }}>
       <Box sx={boxStyle}>

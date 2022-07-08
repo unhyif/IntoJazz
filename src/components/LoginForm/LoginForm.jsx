@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useServiceContext } from 'contexts/ServiceContext';
 import { useModalDispatchContext } from 'contexts/ModalDispatchContext';
-import { validate } from 'utils/validate';
+import { validateInput } from 'utils/validateInput';
 import LabelInputWrapper from 'components/LabelInputWrapper/LabelInputWrapper';
 import Label from 'components/Label/Label';
 import Input from 'components/Input/Input';
@@ -34,9 +34,9 @@ const LoginForm = () => {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    const isEmailValid = validate('email', email);
+    const isEmailValid = validateInput('email', email);
     setIsEmailValid(isEmailValid);
-    const isPasswordValid = validate('password', password);
+    const isPasswordValid = validateInput('password', password);
     setIsPasswordValid(isPasswordValid);
     if (!(isEmailValid && isPasswordValid)) return;
 

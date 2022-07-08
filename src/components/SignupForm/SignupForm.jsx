@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useServiceContext } from 'contexts/ServiceContext';
-import { validate } from 'utils/validate';
+import { validateInput } from 'utils/validateInput';
 import LabelInputWrapper from 'components/LabelInputWrapper/LabelInputWrapper';
 import Label from 'components/Label/Label';
 import Input from 'components/Input/Input';
@@ -24,13 +24,13 @@ const SignupForm = ({ onSuccess }) => {
   const onEmailChange = e => {
     const email = e.target.value;
     setEmail(email);
-    setIsEmailValid(validate('email', email));
+    setIsEmailValid(validateInput('email', email));
   };
 
   const onPasswordChange = e => {
     const password = e.target.value;
     setPassword(password);
-    setIsPasswordValid(validate('password', password));
+    setIsPasswordValid(validateInput('password', password));
   };
 
   const onPasswordConfirmChange = e => {
