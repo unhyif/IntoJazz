@@ -25,6 +25,7 @@ const DateRangePicker = ({ range, setRange }) => {
           renderInput={params => <TextField {...params} />}
         />
         <MobileDatePicker
+          minDate={range[0]}
           label="To"
           value={range[1]}
           onChange={onToChange}
