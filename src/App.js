@@ -8,13 +8,36 @@ import Layout from 'layout/Layout';
 import Home from 'routes/Home/Home';
 import GuestOnly from 'components/GuestOnly';
 
+const mainColor = '#776dbe';
+
 const theme = createTheme({
   typography: {
     htmlFontSize: 10,
   },
+
   palette: {
     primary: {
-      main: '#53499d',
+      main: mainColor,
+    },
+  },
+
+  components: {
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: `${mainColor}`,
+        },
+      },
+    },
+
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '&.Mui-focused fieldset': {
+            borderColor: '#d2c7f5 !important',
+          },
+        },
+      },
     },
   },
 });
